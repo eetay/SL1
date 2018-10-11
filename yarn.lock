@@ -13,3 +13,7 @@ https@1.0.0:
 node-fetch@2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.2.0.tgz#4ee79bde909262f9775f731e3656d0db55ced5b5"
+
+tiny-promise-pool@0.6.4:
+  version "0.6.4"
+  resolved "https://registry.yarnpkg.com/tiny-promise-pool/-/tiny-promise-pool-0.6.4.tgz#a8c95411d4983a1cc49c1dbd169e24a2e247cc2b"

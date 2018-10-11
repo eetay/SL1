@@ -8,22 +8,80 @@ let Connection = function(params) {
   this.params = params
 }
 
+function toQuery(obj) {
+  return Object.keys(obj).map(function(key) {
+    return encodeURIComponent(key) + '=' + encodeURIComponent(obj[key])
+  }).join('&')
+}
+
+function join_url() {
+  let joined = ''
+  let ends = true
+  for (let i in arguments) {
+    begins = (arguments[i].charAt(0) == '/')
+    if (ends && begins) {
+      joined = joined.slice(-1) + arguments[i]
+    } else if (!ends && !begins) {
+      joined = joined + '/' + arguments[i]
+    } else {
+      joined += arguments[i]
+    }
+    ends = (joined.charAt(joined.length - 1) == '/')
+  }
+  return joined
+}
+
 Connection.prototype = {
   send: function(request) {
     let headers = new fetch.Headers()
-    let { connection, path, method, payload } = request
+    let { connection, path, method, payload, query } = request
     let { username, password, origin } = connection.params
-    let url = [origin, path].join('/')
+    let url = join_url(origin, path)
+    if (query) url += '?' + toQuery(query)
     headers.set('Authorization', 'Basic ' + Buffer.from(username + ":" + password).toString('base64'))
     headers.append('Accept', 'application/json')
     headers.set('Content-Type', 'application/json')
     options = { agent, method, headers }
     if (payload) options.body = JSON.stringify(payload)
-    console.log(options)
+    console.log(url)
     return fetch(url, options).then( response => {
       //response.text().then(text => console.log('xxx', text))
       return (request.parser == 'text') ? response.text() : response.json()
     })
+  },
+  listAssetsRequest(filters) {
+    var request = {
+      method: 'GET',
+      connection: this,
+      path: '/api/device',
+      query: filters
+    }
+    request.send = function() {
+      return request.connection.send(request)
+    }
+    return request
+  },
+  getAnyResourceRequest(path) {
+    var request = {
+      method: 'GET',
+      connection: this,
+      path: path
+    }
+    request.send = function() {
+      return request.connection.send(request)
+    }
+    return request
+  },
+  getAssetRequest(id) {
+    var request = {
+      method: 'GET',
+      connection: this,
+      path: `/api/device/${id}`
+    }
+    request.send = function() {
+      return request.connection.send(request)
+    }
+    return request
   },
   describeAPIRequest() {
     var request = {

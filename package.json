@@ -6,6 +6,7 @@
   "dependencies": {
     "base-64": "0.1.0",
     "https": "1.0.0",
-    "node-fetch": "2.2.0"
+    "node-fetch": "2.2.0",
+    "tiny-promise-pool": "0.6.4"
   }
 }
