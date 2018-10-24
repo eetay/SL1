@@ -1,8 +1,8 @@
 const SL1 = require('./SL1')
-var promisePool = require('tiny-promise-pool')
+const promisePool = require('tiny-promise-pool')
 
-let sl = new SL1.Connection(require('./config.json'))
-let sl2 = new SL1.Connection(require('./config2.json'))
+const sl = new SL1.Connection(require('./config.json'))
+const sl2 = new SL1.Connection(require('./config2.json'))
 
 
 // sl.getStepRequest('stepTemplate').send().then(
@@ -20,13 +20,23 @@ let sl2 = new SL1.Connection(require('./config2.json'))
 // sl.describeAPIRequest().send().then(
 //   text => console.log(text.replace(/=\/static/g, `=https://18.212.47.252/static`))
 // )
+function remapKeys(obj, keymap) {
+  ret = {}
+  for (var k in obj) {
+    if (keymap[k]) ret[keymap[k]] = obj[k]
+  }
+  return ret
+}
 
 function sendNext({index, data}) {
   if (!data[index]) return null
-  return sl2.getAnyResourceRequest(data[index].URI).send()
+  return sl2.getAnyResourceRequest(data[index].URI, {'extended_fetch':'1'}).send()
 }
 
-sl2.listAssetsRequest({'filter.last_poll.min':'1518867900'}).send().then(
+sl2.listAssetsRequest({
+  'filter.last_poll.min':'1518867900',
+  //'extended_fetch':'1'
+}).send().then(
   json => {
     //console.log(JSON.stringify(json))
     console.log(json.result_set[0])
@@ -37,7 +47,18 @@ sl2.listAssetsRequest({'filter.last_poll.min':'1518867900'}).send().then(
     })
   }
 ).then(
-   json => console.log(JSON.stringify(json))
+  json => console.log(JSON.stringify(json))
+/*
+  json => console.log(
+    json.map(
+      item => remapKeys(item.result, {
+        'updated_by' : 'ub',
+        'name' : 'xy',
+        'ip': 'zz'
+      })
+    )
+  )
+*/
 )
 
 

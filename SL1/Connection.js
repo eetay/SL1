@@ -38,12 +38,13 @@ Connection.prototype = {
     let { username, password, origin } = connection.params
     let url = join_url(origin, path)
     if (query) url += '?' + toQuery(query)
+    console.log(url)
     headers.set('Authorization', 'Basic ' + Buffer.from(username + ":" + password).toString('base64'))
     headers.append('Accept', 'application/json')
     headers.set('Content-Type', 'application/json')
     options = { agent, method, headers }
     if (payload) options.body = JSON.stringify(payload)
-    console.log(url)
+    //console.log(options)
     return fetch(url, options).then( response => {
       //response.text().then(text => console.log('xxx', text))
       return (request.parser == 'text') ? response.text() : response.json()
@@ -61,11 +62,12 @@ Connection.prototype = {
     }
     return request
   },
-  getAnyResourceRequest(path) {
+  getAnyResourceRequest(path, filters) {
     var request = {
       method: 'GET',
       connection: this,
-      path: path
+      path: path + '/vitals',
+      query: filters
     }
     request.send = function() {
       return request.connection.send(request)

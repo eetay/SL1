@@ -1,0 +1,83 @@
+{
+	"name": "versafe_vpn_access_https_vs",
+	"ip": "",
+	"hostname": null,
+	"snmp_cred_id": "/api/credential/snmp/37",
+	"snmp_w_cred_id": null,
+	"class_type": "/api/device_class/4303",
+	"collector_group": "/api/collector_group/2",
+	"active": {
+		"user-disabled": 1,
+		"unavailable": 0,
+		"maintenance": 0,
+		"system-disabled": 0,
+		"user-initiated-maintenance": 0
+	},
+	"organization": "/api/organization/0",
+	"auto_update": "1",
+	"event_suppress_mask": "00:10:00",
+	"auto_clear": "1",
+	"log_all": "1",
+	"daily_port_scan": "1",
+	"critical_ping": "0",
+	"agent_prime_backend": null,
+	"agent_os": null,
+	"scan_all_ips": "0",
+	"preserve_hostname": "1",
+	"disable_asset_update": "0",
+	"date_added": "1469572744",
+	"alert_avail_and_latency_fail": "0",
+	"l3_topo": null,
+	"updated_by": "/api/account/1",
+	"edit_date": "1469572744",
+	"dashboard": null,
+	"interface_inventory_timeout": null,
+	"max_interface_inventory_count": null,
+	"bypass_interface_inventory": "0",
+	"inf_hash": null,
+	"agent_guid": null,
+	"parent_device": null,
+	"child_devices": [],
+	"state": "0",
+	"last_poll": null,
+	"notes": {
+		"URI": "/api/device/87/note/?hide_filterinfo=1&limit=1000",
+		"description": "Notes"
+	},
+	"logs": {
+		"URI": "/api/device/87/log",
+		"description": "Logs"
+	},
+	"applications": {
+		"URI": "/api/device/87/aligned_app",
+		"description": "Aligned Dynamic Applications"
+	},
+	"performance_data": {
+		"URI": "/api/device/87/performance_data",
+		"description": "Collected Performance Dynamic App Data"
+	},
+	"config_data": {
+		"URI": "/api/device/87/config_data",
+		"description": "Collected Config Dynamic App Data"
+	},
+	"vitals": {
+		"URI": "/api/device/87/vitals",
+		"description": "Component-mapped (CPU/MEM/FS) Performance App Data and Availability/Latency Data"
+	},
+	"interfaces": {
+		"URI": "/api/device/87/interface?limit=1000",
+		"description": "Index of interfaces for a device"
+	},
+	"thresholds": {
+		"URI": "/api/device/87/device_thresholds",
+		"description": "Current device threshold values"
+	},
+	"details": {
+		"URI": "/api/device/87/detail",
+		"description": "Current device details"
+	},
+	"app_credentials": {
+		"URI": "/api/device/87/device_app_credentials",
+		"description": "Read-only lookup for aligned credentials and the device-aligned apps that are using them"
+	}
+}
